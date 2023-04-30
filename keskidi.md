@@ -53,7 +53,7 @@ The `inotify` API is exactly what we are looking for to peek on writes on a file
 
 Calling `inotify_init()` will return a special file descriptor, say `ifd`, that is blocking on `read` (stops execution) until an event happens.
 
-Then, calling `inotify_add_watch(ifd,'proc/self/fd/4'),IN_MODIFY)` will make it so that modification events (IN_MODIFY) on the temporary file (accessible via `'proc/self/fd/4'` filename) will be registered in ifd
+Then, calling `inotify_add_watch(ifd,'proc/self/fd/4',IN_MODIFY)` will make it so that modification events (IN_MODIFY) on the temporary file (accessible via `'proc/self/fd/4'` filename) will be registered in ifd
 
 Reading from `ifd` will block until a new event has been registered.
 
