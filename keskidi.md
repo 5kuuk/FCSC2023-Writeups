@@ -49,9 +49,9 @@ Everytime a call to `syncfs` is used in the parent we output the corresponding f
 
 By looking into gdb, I found that tmp_fd is reliably equals to 4, and saw that `SEEK_CUR = 2` by compiling then running an appropriate C code that prints it.
 
-The `inotify` API is exactly what we are looking for to peek on writes on a file. It is a familiy of syscalls which allow for monitoring of the filesystem.
+The `inotify` API is exactly what we are looking for to peek on writes on a file. It is a family of syscalls which allow for monitoring of the filesystem.
 
-Calling `inotify_init()` will return a special file descriptor, say `ifd`, that will is blocking on read (stops execution) until an event happens.
+Calling `inotify_init()` will return a special file descriptor, say `ifd`, that is blocking on `read` (stops execution) until an event happens.
 
 Then, calling `inotify_add_watch(ifd,'proc/self/fd/4'),IN_MODIFY)` will make it so that modification events (IN_MODIFY) on the temporary file (accessible via `'proc/self/fd/4'` filename) will be registered in ifd
 
